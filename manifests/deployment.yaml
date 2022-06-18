@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: springboot-k8s-demo
-        image: tie304628/springboot-k8s-demo:v0001
+        image: tie304628/springboot-k8s-demo:6cde5815493dc6c0f7abc61dca3fac30b2396aad
         resources:
           limits:
             cpu: "1"
@@ -28,15 +28,15 @@ spec:
           httpGet:
             path: /actuator/health/liveness
             port: 8080
-          initialDelaySeconds: 30
-          periodSeconds: 3
+          initialDelaySeconds: 10
+          periodSeconds: 1
         readinessProbe:
           httpGet:
             path: /actuator/health/readiness
             port: 8080
-          initialDelaySeconds: 30
-          periodSeconds: 5
+          periodSeconds: 1
         lifecycle:
           preStop:
             exec:
-              command: ["sh", "-c", "sleep 10"]
+              command: ["/bin/sleep","10"]
+      terminationGracePeriodSeconds: 30
