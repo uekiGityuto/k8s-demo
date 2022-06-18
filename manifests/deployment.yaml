@@ -19,22 +19,23 @@ spec:
         image: tie304628/springboot-k8s-demo:6cde5815493dc6c0f7abc61dca3fac30b2396aad
         resources:
           limits:
-            cpu: "1"
-            memory: "1000Mi"
+            cpu: "2"
+            memory: "2Gi"
           requests:
-            cpu: "0.5"
-            memory: "500Mi"
+            cpu: "2"
+            memory: "2Gi"
         livenessProbe:
-          failureThreshold: 1
+          failureThreshold: 3
           httpGet:
             path: /actuator/health/liveness
             port: 8080
-          initialDelaySeconds: 10
+          initialDelaySeconds: 30
           periodSeconds: 1
         readinessProbe:
           httpGet:
             path: /actuator/health/readiness
             port: 8080
+          initialDelaySeconds: 30
           periodSeconds: 1
         lifecycle:
           preStop:
